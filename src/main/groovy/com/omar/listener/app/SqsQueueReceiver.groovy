@@ -10,7 +10,7 @@ import org.springframework.cloud.aws.messaging.listener.Acknowledgment;
 import org.springframework.cloud.aws.messaging.listener.SqsMessageDeletionPolicy;
 import java.sql.Timestamp;
 import java.util.Date;
-
+import groovy.json.JsonSlurper;
 
 class OmarSqsQueueReceiver {
 
@@ -32,5 +32,12 @@ class OmarSqsQueueReceiver {
         Timestamp ts = new Timestamp(time);
         System.out.println("Current Time Stamp: "+ts);
         System.out.println("Inside receive : " + message);
+
+        def slurper = new groovy.json.JsonSlurper();
+        def result = slurper.parseText(message);
+
+        println result.Records.s3.bucket.name
+        println result.Records.s3.object.key
+
     }
 }
