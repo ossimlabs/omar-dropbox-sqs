@@ -1,6 +1,7 @@
 package com.omar.listener.app
 
-import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQS
+import groovy.json.JsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,6 +12,7 @@ import org.springframework.cloud.aws.messaging.listener.SqsMessageDeletionPolicy
 import java.sql.Timestamp;
 import java.util.Date;
 import groovy.json.JsonSlurper;
+import groovy.json.JsonBuilder;
 
 class OmarSqsQueueReceiver {
 
@@ -21,8 +23,8 @@ class OmarSqsQueueReceiver {
         this.queueMessagingTemplate = new QueueMessagingTemplate(amazonSqs);
     }
 
-    @MessageMapping("praveen-queue")
-    @SqsListener(value = "praveen-queue", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
+    @MessageMapping("dg-gcs-gegd-queue")
+    @SqsListener(value = "dg-gcs-gegd-queue", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
     public void receive(String message, Acknowledgment acknowledgment) {
         //Date object
         Date date= new Date();
@@ -36,8 +38,18 @@ class OmarSqsQueueReceiver {
         def slurper = new groovy.json.JsonSlurper();
         def result = slurper.parseText(message);
 
-        println result.Records.s3.bucket.name
-        println result.Records.s3.object.key
+        def json = new JsonBuilder();
+
+        def root = json bucket: result.Records.s3.bucket.name, filename: result.Records.s3.object.key
+
+        System.out.println("json : " + json);
+        System.out.println("root: " + root);
+        System.out.println("root: " + root.bucket);
+        System.out.println("root: " + root.filename);
+
+
+
+
 
     }
 }
