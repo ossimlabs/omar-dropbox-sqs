@@ -13,7 +13,13 @@ import java.sql.Timestamp;
 import java.util.Date;
 import groovy.json.JsonSlurper;
 import groovy.json.JsonBuilder;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.integration.annotation.InboundChannelAdapter;
 
+@EnableBinding(Source.class)
 class OmarSqsQueueReceiver {
 
     private final QueueMessagingTemplate queueMessagingTemplate;
@@ -42,8 +48,6 @@ class OmarSqsQueueReceiver {
 
         def root = json bucket: result.Records.s3.bucket.name, filename: result.Records.s3.object.key
 
-        System.out.println("json : " + json);
-        System.out.println("root: " + root);
         System.out.println("root: " + root.bucket);
         System.out.println("root: " + root.filename);
 
