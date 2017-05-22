@@ -19,7 +19,6 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 
-@EnableBinding(Source.class)
 class OmarSqsQueueReceiver {
 
     private final QueueMessagingTemplate queueMessagingTemplate;
@@ -31,6 +30,8 @@ class OmarSqsQueueReceiver {
 
     @MessageMapping("dg-gcs-gegd-queue")
     @SqsListener(value = "dg-gcs-gegd-queue", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
+//    @MessageMapping("praveen-queue")
+//    @SqsListener(value = "praveen-queue", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
     public void receive(String message, Acknowledgment acknowledgment) {
         //Date object
         Date date= new Date();
