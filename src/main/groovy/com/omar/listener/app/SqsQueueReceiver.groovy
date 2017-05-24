@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import groovy.json.JsonSlurper;
 import groovy.json.JsonBuilder;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -34,13 +35,15 @@ class OmarSqsQueueReceiver {
 //    @SqsListener(value = "praveen-queue", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
     public void receive(String message, Acknowledgment acknowledgment) {
         //Date object
-        Date date= new Date();
+        Date date = new Date();
         //getTime() returns current time in milliseconds
         long time = date.getTime();
         //Passed the milliseconds to constructor of Timestamp class
         Timestamp ts = new Timestamp(time);
-        System.out.println("Current Time Stamp: "+ts);
+        System.out.println("Current Time Stamp: " + ts);
         System.out.println("Inside receive : " + message);
+
+        AwsData senddata = new AwsData();
 
         def slurper = new groovy.json.JsonSlurper();
         def result = slurper.parseText(message);
@@ -49,12 +52,16 @@ class OmarSqsQueueReceiver {
 
         def root = json bucket: result.Records.s3.bucket.name, filename: result.Records.s3.object.key
 
-        System.out.println("root: " + root.bucket);
-        System.out.println("root: " + root.filename);
+        senddata.setFilename(root.filename);
+        senddata.setBucket(root.bucket);
 
-
-
-
-
+        System.out.println("filename" + senddata.getFilename())
+        System.out.println("bucket" + senddata.getBucket())
     }
+
+    @InboundChannelAdapter(Source.OUTPUT)
+    public String sayHello() {
+        return "hello new" + System.currentTimeMillis();
+    }
+
 }

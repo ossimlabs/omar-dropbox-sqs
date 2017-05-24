@@ -25,9 +25,4 @@ class OmarSQSReceiverApp {
     static void main(String[] args) {
         SpringApplication.run OmarSQSReceiverApp, args
     }
-
-    @InboundChannelAdapter(Source.OUTPUT)
-    public String sayHello() {
-        return "hello again" + System.currentTimeMillis();
-    }
 }
