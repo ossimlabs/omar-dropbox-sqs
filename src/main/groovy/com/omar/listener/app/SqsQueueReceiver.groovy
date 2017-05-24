@@ -23,6 +23,7 @@ import org.springframework.integration.annotation.InboundChannelAdapter;
 class OmarSqsQueueReceiver {
 
     private final QueueMessagingTemplate queueMessagingTemplate;
+    AwsData senddata = new AwsData();
 
     @Autowired
     OmarSqsQueueReceiver(AmazonSQS amazonSqs) {
@@ -43,8 +44,6 @@ class OmarSqsQueueReceiver {
         System.out.println("Current Time Stamp: " + ts);
         System.out.println("Inside receive : " + message);
 
-        AwsData senddata = new AwsData();
-
         def slurper = new groovy.json.JsonSlurper();
         def result = slurper.parseText(message);
 
@@ -60,8 +59,8 @@ class OmarSqsQueueReceiver {
     }
 
     @InboundChannelAdapter(Source.OUTPUT)
-    public String sayHello() {
-        return "hello new" + System.currentTimeMillis();
+    public AwsData sayHello() {
+        return senddata;
     }
 
 }
