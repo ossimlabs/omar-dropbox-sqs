@@ -12,25 +12,17 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 @EnableConfigurationProperties(QueueProperties)
-    class QueueConfiguration {
+class QueueConfiguration {
 
-    QueueProperties getQueue() {
-        return queue
-    }
-
-    void setQueue(QueueProperties queue) {
-        this.queue = queue
-    }
     @Autowired
-        private QueueProperties queue;
+    private QueueProperties queueProperties;
 
-        @PostConstruct
-        void init() {
-            System.setProperty("queue.name", queue.name);
- //           System.out.println("quenename" + queue.name);
-            queue.setName(queue.name)
-
-        }
-
+    @PostConstruct
+    void init() {
+        System.setProperty("queueProperties.name", queueProperties.name);
+        queueProperties.setName(queueProperties.name)
 
     }
+
+
+}

@@ -8,12 +8,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 class QueueProperties {
 
     String name;
-
-    String getName() {
-        return name
-    }
-
-    void setName(String name) {
-        this.name = name
-    }
+    
 }

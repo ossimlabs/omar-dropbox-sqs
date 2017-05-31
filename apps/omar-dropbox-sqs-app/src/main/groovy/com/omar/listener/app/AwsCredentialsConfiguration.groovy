@@ -14,8 +14,8 @@ class AwsCredentialsConfiguration {
     @Autowired
     private AwsCredentialsProperties awsCredentialsProperties;
 
-    @Autowired
-    private OmarSqsQueueReceiver oReceiver;
+    // @Autowired
+    // private OmarSqsQueueReceiver oReceiver;
 
     @PostConstruct
     void init() {
