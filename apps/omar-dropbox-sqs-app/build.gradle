@@ -78,28 +78,6 @@ task wrapper(type: Wrapper) {
   gradleVersion = gradleWrapperVersion
 }
 
-assets {
-  minifyJs = true
-  minifyCss = true
-  excludes = [
-    "**/bootstrap/**",
-    "**/bootswatch-slate/**",
-    "**/Cesium/**",
-    "**/jquery/**",
-    "**/momentjs/**",
-    "**/requirejs/**",
-    "**/*.css",
-    "**/*.js"
-  ]
-  includes = [
-    "**/application.*",
-    "**/bootswatch-slate/**/glyphicons*",
-    "**/Cesium/Assets/**",
-    "**/Cesium/Workers/**",
-    "**/index-bundle.*"
-  ]
-}
-
 publishing {
   publications {
     mavenJava(MavenPublication) {
