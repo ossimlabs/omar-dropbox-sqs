@@ -24,6 +24,7 @@ class OmarSqsQueueReceiver {
 
     private final QueueMessagingTemplate queueMessagingTemplate;
     AwsData senddata = new AwsData();
+    QueueConfiguration prop = new QueueConfiguration();
 
     @Autowired
     OmarSqsQueueReceiver(AmazonSQS amazonSqs) {
@@ -41,8 +42,8 @@ class OmarSqsQueueReceiver {
         long time = date.getTime();
         //Passed the milliseconds to constructor of Timestamp class
         Timestamp ts = new Timestamp(time);
-        System.out.println("Current Time Stamp: " + ts);
-        System.out.println("Inside receive : " + message);
+//        System.out.println("Current Time Stamp: " + ts);
+//        System.out.println("Inside receive : " + message);
 
         def slurper = new groovy.json.JsonSlurper();
         def result = slurper.parseText(message);
@@ -54,8 +55,8 @@ class OmarSqsQueueReceiver {
         senddata.setFilename(root.filename);
         senddata.setBucket(root.bucket);
 
-        System.out.println("filename" + senddata.getFilename())
-        System.out.println("bucket" + senddata.getBucket())
+        System.out.println(senddata.getFilename())
+//        System.out.println("bucket" + senddata.getBucket())
     }
 
     @InboundChannelAdapter(Source.OUTPUT)

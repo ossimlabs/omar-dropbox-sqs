@@ -27,7 +27,7 @@ import javax.annotation.PostConstruct;
         @PostConstruct
         void init() {
             System.setProperty("queue.name", queue.name);
-            System.out.println("quenename" + queue.name);
+ //           System.out.println("quenename" + queue.name);
             queue.setName(queue.name)
 
         }

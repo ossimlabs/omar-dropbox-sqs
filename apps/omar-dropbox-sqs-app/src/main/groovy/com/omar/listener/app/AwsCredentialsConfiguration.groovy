@@ -21,8 +21,9 @@ class AwsCredentialsConfiguration {
     void init() {
         System.setProperty("aws.accessKeyId", awsCredentialsProperties.accessKey);
         System.setProperty("aws.secretKey", awsCredentialsProperties.secretKey);
-        println"\n${'#'*10} ${awsCredentialsProperties} ${'#'*10}\n" 
-        System.out.println("Got to init");
+        System.out.println("awsCredentialsProperties.accessKey" + awsCredentialsProperties.accessKey);
+        System.out.println("awsCredentialsProperties.secretKey" + awsCredentialsProperties.secretKey);
+        println"\n${'#'*10} ${awsCredentialsProperties} ${'#'*10}\n"
 
     }
 
