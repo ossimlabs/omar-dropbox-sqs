@@ -30,7 +30,6 @@ group "io.ossim.omar.apps"
 
 	ext {
 		springBootVersion = '1.5.3.RELEASE'
-		grailsVersion = project.grailsVersion
 		baseImage = "omar-base"
 	}
 	
