@@ -25,3 +25,6 @@ nbdist/
 .nb-gradle/
 
 /application.yml
+apps/omar-dropbox-sqs-app/application.yml
+apps/omar-dropbox-sqs-app/src/main/resources/application.yml
+apps/omar-dropbox-sqs-app/src/main/resources/application.back
